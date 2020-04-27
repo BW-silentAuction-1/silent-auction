@@ -1,26 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Switch, Route } from "react-router-dom";
+import styled from "styled-components";
 
-function App() {
+import Styles from "./assets/Styles";
+
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <StyledApp className="App">
+    hello world
+      <Switch>
+        <Route path="/login"></Route>
+        <Route path="/"></Route>
+      </Switch>
+    </StyledApp>
   );
 }
 
-export default App;
+const StyledApp = styled.div`
+  height: 100%;
+  width: 100%;
+  background-color: ${Styles.color.bg};
+`;
