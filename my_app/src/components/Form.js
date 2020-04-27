@@ -38,6 +38,7 @@ export default function Form(props) {
             </div>
             <label>
               <input type="checkbox" name="tos" data-cy="tos" />
+              <span class="checkbox" />
               <span>I agree to the terms of service</span>
             </label>
             <div className="btns">
@@ -47,9 +48,9 @@ export default function Form(props) {
           </form>
         </Route>
         <Route path="/login">
-          <h2>Welcome back!</h2>
+          <h2 class="login-text">Welcome back!</h2>
           <p>please enter your login info below</p>
-          <form>
+          <form class="login-form">
             <div>
               <label>username</label>
               <input type="text"
@@ -105,6 +106,14 @@ const StyledForm = styled.div`
   h2 {
     text-align: center;
     font-size: ${Styles.font.size.medLarge};
+    padding: 15px;
+    &.login-text {
+      padding-top: 20vh;
+    }
+  }
+  p {
+    padding: 15px 10%;
+    font-size: ${Styles.font.size.small};
   }
 
   form {
@@ -116,18 +125,52 @@ const StyledForm = styled.div`
 
     padding: 20px;
 
+    label {
+      font-size: ${Styles.font.size.small};
+    }
+
+    &.login-form {
+      flex-grow: 0;
+      & > div:not(:last-child) {
+        margin-bottom: 15px;
+      }
+    }
+
+    & > label {
+      padding-top: 10px;
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: flex-end;
+      align-items: center;
+      input {
+        margin-right: 5px;
+      }
+    }
+    & > div.btns {
+      padding: 15px 10% 0;
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-evenly;
+      button {
+        padding: 6px 20px;
+        background-color: ${Styles.color.mainDark};
+        font-family: ${Styles.font.family};
+        border-radius: 7px;
+        color: ${Styles.color.white};
+      }
+    }
     & > div:not(.btns) {
       display: flex;
       flex-flow: row nowrap;
       justify-content: stretch;
 
-      border-radius: 5px;
+      border-radius: 10px;
       overflow: hidden;
       box-shadow: 4px 4px 10px #000;
 
       label {
         flex-grow: 1;
-        padding: 7px;
+        padding: 5px;
         background-color: ${Styles.color.mainDark};
         display: flex;
         justify-content: center;

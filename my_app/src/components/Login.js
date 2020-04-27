@@ -19,7 +19,7 @@ const StyledLogin = styled.div`
   flex-flow: row nowrap;
   align-items: stretch;
   & > div {
-    flex-grow: 1;
+    width: 60%;
   }
   & > .Form {
     width: 40%;
