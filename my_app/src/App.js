@@ -3,14 +3,14 @@ import './App.css';
 import { connect } from 'react-redux';
 import { Switch, Route } from 'react-router-dom'
 import styled from "styled-components";
-import PrivateRoute from './utils/'
+import PrivateRoute from './utils/PrivateRoute'
 
 import AuctionList from './components/AuctionList'
 import SellerDash from './components/SellerDash';
 import Login from "./components/Login";
 import Styles from "./assets/Styles";
 
-export default function App() {
+function App() {
   return (
     <StyledApp className="App">
       <Switch>

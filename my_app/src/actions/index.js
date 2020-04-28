@@ -11,9 +11,9 @@ export const signupSave = (userInput) => {
     return (dispatch) => {
         dispatch({ type: POSTING })
         //need to add endpoints
-        axiosWithAuth().post('', userInput)
+        axiosWithAuth().post('/api/auth/login', userInput)
             .then(response => {
-                window.localStorage.setItem('token', res.data.token)
+                window.localStorage.setItem('token', response.data.token)
                 dispatch({ type: POSTING_SIGNUP_SUCCESS })
             })
             .catch(err => {
@@ -26,11 +26,11 @@ export const loginSave = (userInput) => {
     return (dispatch) => {
         dispatch({ type: POSTING })
         //need to add endpoints
-        axiosWithAuth().post('', userInput)
+        axiosWithAuth().post('/api/auth/login', userInput)
             .then(response => {
                 window.localStorage.setItem('token', response.data.token)
                 // alert('redirecting to the Auction Page')
-                dispatch({ tpye: POSTING_LOGIN_SUCCESS, payload: { user_id: res.data.id, user_type: res.data.type } })
+                dispatch({ tpye: POSTING_LOGIN_SUCCESS, payload: { user_id: response.data.id, user_type: response.data.type } })
 
             })
             .catch(err => {
@@ -47,17 +47,24 @@ export const FETCHING_FAILURE = 'FETCHING_FAILURE'
 
 
 export const fetchAuction = () => {
+    console.log("fetch auction logging");
+
     return (dispatch) => {
         dispatch({ type: FETCHING })
         //need endpoints from backend
-        axiosWithAuth().get('')
+        return axiosWithAuth().get('/api/users/profile')
             .then(response => {
                 console.log("fetching auction response", response)
                 dispatch({ type: FETCHING_SUCCESS, payload: response.data })
             })
             .catch(err => {
+                console.log("failure: ", err);
                 console.log(err)
-                dispatch({ type: FETCHING_FAILURE })
+                // dispatch({ type: FETCHING_FAILURE })
+
+                var auctions = [{ name: 'auction test 1', description: 'test description', initial_price: 55 }]
+                dispatch({ type: FETCHING_SUCCESS, payload: auctions })
+
             })
     }
 }
@@ -110,7 +117,7 @@ export const updateAuction = (id, listing) => {
     return (dispatch) => {
         dispatch({ type: AUCTION_UPDATE })
         //need to add endpoint below
-        axiosWithAuth().put(${ id }, listing)
+        axiosWithAuth().put({ id }, listing)
             .then(response => {
                 console.log(response)
                 dispatch({ type: AUCTION_UPDATE_SUCCESS })

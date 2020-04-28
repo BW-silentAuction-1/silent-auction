@@ -61,7 +61,8 @@ function SellerDash(props) {
 }
 export default connect(state => {
     return {
-        user_id: state.crudReducer.user_id
+        // user_id: state.crudReducer.user_id
+        auctions: state.auctions,
     }
 }, { postAuction })(SellerDash)
 

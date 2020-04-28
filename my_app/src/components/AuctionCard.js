@@ -1,6 +1,10 @@
 import React from 'react';
 import { useHistory, useParams } from 'react-router-dom'
-
+// import { makeStyles } from "@material-ui/core/styles";
+// import Card from "@material-ui/core/Card";
+// import CardContent from "@material-ui/core/CardContent";
+// import CardMedia from "@material-ui/core/CardMedia";
+// import Typography from "@material-ui/core/Typography";
 
 export const AuctionCard = (props) => {
 
@@ -11,7 +15,7 @@ export const AuctionCard = (props) => {
         history.push(`closerlook/${id}`, auctionData)
     }
 
-    const classes = useStyles();
+    // const classes = useStyles();
 
     return (
         <div>

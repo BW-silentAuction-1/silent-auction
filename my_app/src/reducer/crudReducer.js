@@ -31,7 +31,7 @@ const initialState = {
         user_id: '',
         user_type: ''
     },
-    auctions: [],
+    auctions: [{ name: 'testxx' }],
     isFetching: false,
     isPosting: false,
     isUpdating: false,
@@ -52,6 +52,7 @@ export const crudReducer = (state = initialState, action) => {
         case FETCHING:
             return { ...state, isFetching: true }
         case FETCHING_SUCCESS:
+            console.log("handling fetch success: ", action.payload);
             return { ...state, auctions: action.payload, isFetching: false }
         case FETCHING_FAILURE:
             return { ...state, isFetching: false }
