@@ -3,13 +3,7 @@ import styled from "styled-components";
 
 import Styles from "../assets/Styles";
 
-import dummyPic from "../assets/dummyGuitar.jpg";
-
-const dummyAd = {
-  name: "Electric Guitar - BRAND NEW",
-  src: dummyPic,
-  time: "03 : 47 : 25"
-};
+import dummyAd from "../assets/dummyAd";
 
 export default function Splash(props) {
   return (
