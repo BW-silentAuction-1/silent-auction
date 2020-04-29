@@ -4,6 +4,7 @@ import axios from "axios";
 import styled from "styled-components";
 import * as yup from "yup";
 
+import BidderDash from "./components/BidderDash"
 import Form from "./components/Form";
 import Styles from "./assets/Styles";
 
@@ -132,6 +133,9 @@ export default function App() {
   return (
     <StyledApp className="App">
       <Switch>
+        <Route path="/dashboard">
+          <BidderDash />
+        </Route>
         <Route path="/">
           <Form
             signupForm={signupForm}
