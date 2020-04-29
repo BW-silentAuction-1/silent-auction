@@ -78,7 +78,7 @@ export const AUCTION_POSTING_SUCCESS = 'AUCTION_POSTING_SUCCESS'
 export const postAuction = (listing) => {
     return (dispatch) => {
         dispatch({ type: AUCTION_POSTING })
-        axiosWithAuth().post('', listing)
+        axiosWithAuth().post('api/auctions', listing)
             .then(response => {
                 console.log("postAuction response data", response)
                 dispatch({ type: AUCTION_POSTING_SUCCESS })
@@ -99,7 +99,7 @@ export const deleteAuction = (id) => {
     return (dispatch) => {
         dispatch({ type: AUCTION_DELETE })
         //need to add endpoints below
-        axiosWithAuth().delete(`${id}`)
+        axiosWithAuth().delete(`api/auctions/${id}`)
             .then(response => {
                 console.log(response)
                 dispatch({ type: AUCTION_DELETE_SUCCESS })
@@ -117,7 +117,7 @@ export const updateAuction = (id, listing) => {
     return (dispatch) => {
         dispatch({ type: AUCTION_UPDATE })
         //need to add endpoint below
-        axiosWithAuth().put({ id }, listing)
+        axiosWithAuth().put(`/api/auctions/${id}`, listing)
             .then(response => {
                 console.log(response)
                 dispatch({ type: AUCTION_UPDATE_SUCCESS })
