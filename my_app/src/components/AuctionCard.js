@@ -12,14 +12,15 @@ export const AuctionCard = (props) => {
 
 
     const closerLook = (id, auctionData) => {
-        history.push(`closerlook/${id}`, auctionData)
+        console.log("closer look clicked");
+        history.push(`../../itemlook/${id}`, auctionData)
     }
 
     // const classes = useStyles();
 
     return (
         <div>
-            <p onClick={() => { closerLook(props.auction.id, props.auction) }}>{props.auction.name}</p>
+            <p onClick={() => { closerLook(props.auction.id, props.auction) }}> Closer Look {props.auction.name}</p>
         </div>
 
 

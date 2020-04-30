@@ -11,7 +11,7 @@ export const signupSave = (userInput) => {
     return (dispatch) => {
         dispatch({ type: POSTING })
         //need to add endpoints
-        axiosWithAuth().post('/api/auth/login', userInput)
+        axiosWithAuth().post('/api/auth/register', userInput)
             .then(response => {
                 window.localStorage.setItem('token', response.data.token)
                 dispatch({ type: POSTING_SIGNUP_SUCCESS })
@@ -28,9 +28,10 @@ export const loginSave = (userInput) => {
         //need to add endpoints
         axiosWithAuth().post('/api/auth/login', userInput)
             .then(response => {
+                console.log("Succesfully logged in");
                 window.localStorage.setItem('token', response.data.token)
                 // alert('redirecting to the Auction Page')
-                dispatch({ tpye: POSTING_LOGIN_SUCCESS, payload: { user_id: response.data.id, user_type: response.data.type } })
+                dispatch({ type: POSTING_LOGIN_SUCCESS, payload: { user_id: response.data.id, user_type: response.data.type } })
 
             })
             .catch(err => {
@@ -76,14 +77,16 @@ export const AUCTION_POSTING_FAILURE = 'AUCTION_POSTING_FAILURE'
 export const AUCTION_POSTING_SUCCESS = 'AUCTION_POSTING_SUCCESS'
 
 export const postAuction = (listing) => {
+    console.log("post auction called: ", listing)
     return (dispatch) => {
         dispatch({ type: AUCTION_POSTING })
         axiosWithAuth().post('api/auctions', listing)
             .then(response => {
-                console.log("postAuction response data", response)
+                console.log("postAuction success response data", response)
                 dispatch({ type: AUCTION_POSTING_SUCCESS })
             })
             .catch(err => {
+                console.log("postAuction failer response data", err)
                 dispatch({ type: AUCTION_POSTING_FAILURE })
             })
     }
@@ -126,6 +129,27 @@ export const updateAuction = (id, listing) => {
             .catch(err => {
                 console.log(err)
                 dispatch({ type: AUCTION_UPDATE_FAILURE })
+            })
+    }
+}
+
+export const AUCTION_BID = 'AUCTION_BID'
+export const AUCTION_BID_UPDATE_FAILURE = 'AUCTION_UPDATE_FAILURE'
+export const AUCTION_BID_UPDATE_SUCCESS = 'AUCTION_UPDATE_SUCCESS'
+
+export const bidAuction = (id, bid) => {
+    return (dispatch) => {
+        dispatch({ type: AUCTION_UPDATE })
+        //need to add endpoint below
+        axiosWithAuth().post(`api/bid/auctions/${id}`, { price: bid })
+            .then(response => {
+                console.log(response)
+                dispatch({ type: AUCTION_BID_UPDATE_SUCCESS })
+
+            })
+            .catch(err => {
+                console.log(err)
+                dispatch({ type: AUCTION_BID_UPDATE_FAILURE })
             })
     }
 }

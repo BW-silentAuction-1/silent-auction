@@ -9,30 +9,36 @@ function AuctionList(props) {
         props.fetchAuction()
     }, [props.fetchAgain, props.isUpdating, props.isDeleting])
 
+    console.log("props.auctions: ", props.auctions);
     if (props.auctions) {
         console.log("test 1");
         return (
             <div className="auctionListContainer">
                 {props.auctions.map((auction) => {
-                    if (Date.parse(auction.deadline) > Date.now()) {
+                    console.log("Date parse: ", Date.parse(auction.date_ending));
+                    console.log("Date now: ", Date.now());
+                    if (Date.parse(auction.date_ending) > Date.now()) {
                         console.log("auction from line 15 auction list", auction)
                         //need to add key 
 
-                        return <>{auction.name}<AuctionCard key={auction.id} auction={auction} /></>
+                        return <>{auction.name}{auction.image}<AuctionCard key={auction.id} auction={auction} /> <br /></>
                     } else {
-                        return <>{auction.name}</>
+                        return <>Expired: {auction.name}</>
                     }
                 })}
 
             </div>
         )
+    } else {
+        return <></>;
     }
 }
 
 
 export default connect(state => {
+    const auctions = state.crudReducer && state.crudReducer.auctions ? state.crudReducer.auctions.auctions : []
     return {
-        auctions: state.crudReducer.auctions,
+        auctions: auctions,
         isUpdating: state.crudReducer.isUpdating,
         isDeleting: state.crudReducer.isDeleting
 

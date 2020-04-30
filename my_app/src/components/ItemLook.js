@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { updateAuction, deleteAuction } from '../actions'
 import { useHistory } from 'react-router-dom'
+import { BidCard } from './BidCard'
+
 
 
 
@@ -12,21 +14,24 @@ const ItemLook = (props) => {
 
 
     const [listing, setListing] = useState({
+        id: '',
         name: '',
         image: '',
-        description: '',
-        initial_price: '',
-        deadline: '',
+        item_description: '',
+        item_price: '',
+        date_ending: '',
         user_id: props.user_id
     })
+    const [editing, setEditing] = useState()
 
     useEffect(() => {
         setListing({
+            id: props.location.state.id,
             name: props.location.state.name,
-            image: props.location.stae.image,
-            description: props.location.state.description,
-            initial_price: props.location.state.initial_price,
-            deadline: props.location.state.deadline,
+            image: props.location.state.image,
+            item_description: props.location.state.item_description,
+            item_price: props.location.state.item_price,
+            date_ending: props.location.state.date_ending,
             user_id: props.user_id
         })
     }, props)
@@ -43,27 +48,34 @@ const ItemLook = (props) => {
         setListing({
             name: '',
             image: '',
-            description: '',
-            initial_price: '',
-            deadline: '',
+            item_description: '',
+            item_price: '',
+            date_ending: '',
             user_id: props.user_id
         })
     }
 
     let history = useHistory()
 
-    const classes = useStyles();
-    const [expand, setExpand] = React.useState(false);
+    // const classes = useStyles();
+    const [expanded, setExpand] = React.useState(false);
     const handleExpandClick = () => {
         setExpand(!expanded);
 
     };
 
-    console.log()
+    console.log("In Item Look: ", listing);
     return (
         <div className="auctionWrapper">
             <p>Sellers Dashboard</p>
-            <form onsubmit={handleSubmit}>
+
+            <div className="name">{listing.name}</div>
+            <div className="image"><img src={listing.image} /></div>
+            <div className="item_price">{listing.item_price}</div>
+            <div className="item_description">{listing.item_description}</div>
+            <BidCard listing={listing} />
+
+            {/* <form onsubmit={handleSubmit}>
                 <label htmlFor='name'>Name</label>
                 <input name='name' onChange={handleChanges}
                     value={listing.name} />
@@ -72,16 +84,16 @@ const ItemLook = (props) => {
                 <input name='image' onChange={handleChanges} value={listing.image} />
 
                 <label htmlFor='initial_price'>Initial Price</label>
-                <input name='initial_price' onChange={handleChanges} value={listing.initial_price} />
+                <input name='item_price' onChange={handleChanges} value={listing.item_price} />
 
                 <label htmlfor='deadline'>Deadline</label>
-                <input type='datetime-local' name='deadline' onChange={handleChanges} value={listing.deadline} />
+                <input type='datetime-local' name='date_ending' onChange={handleChanges} value={listing.date_ending} />
 
                 <label htmlFor='description'>Description</label>
-                <text area name='description' onChange={handleChanges} value={listing.description} />
+                <text area name='item_description' onChange={handleChanges} value={listing.item_description} />
 
                 <button type='submit'>Edit Auction </button>
-            </form>
+            </form> */}
             {editing ? ((
                 <div>
                     <p>Sellers Dashboard</p>
@@ -94,10 +106,10 @@ const ItemLook = (props) => {
                         <input name='image' onChange={handleChanges} value={listing.image} />
 
                         <label htmlFor='initial_price'>Initial Price</label>
-                        <input name='initial_price' onChange={handleChanges} value={listing.initial_price} />
+                        <input name='item_price' onChange={handleChanges} value={listing.item_price} />
 
                         <label htmlfor='deadline'>Deadline</label>
-                        <input type='datetime-local' name='deadline' onChange={handleChanges} value={listing.deadline} />
+                        <input type='datetime-local' name='date_ending' onChange={handleChanges} value={listing.date_ending} />
 
                         <button type='submit'>}>Edit Auction</button>
                     </form>

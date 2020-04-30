@@ -1,61 +1,76 @@
-import React, { useState } from 'react'
+
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
-import { postAuction } from '../actions'
+import { bidAuction } from '../actions'
 import AuctionList from './AuctionList'
+
 
 function BidderDash(props) {
     console.log("seller dash props", props)
+
     const [listing, setListing] = useState({
+        id: '',
         name: '',
         image: '',
-        description: '',
-        initial_price: '',
-        deadline: '',
+        item_description: '',
+        item_price: '',
+        date_ending: '',
         user_id: props.user_id
     })
+    const [editing, setEditing] = useState()
 
-    console.log("listing data", listing)
+    useEffect(() => {
+        if(props.location.state){
+        setListing({
+            id: props.location.state.id,
+            name: props.location.state.name,
+            image: props.location.state.image,
+            item_description: props.location.state.item_description,
+            item_price: props.location.state.item_price,
+            date_ending: props.location.state.date_ending,
+            user_id: props.user_id
+        })
+    }
+    }, props)
+
+    const [bid, setBid] = useState({
+        price: ''
+    })
+
+    // 
 
     const handleChanges = e => {
         e.preventDefault()
-        setListing({ ...listing, [e.target.name]: e.target.value })
+        setBid({ ...bid, [e.target.name]: e.target.value })
     }
 
     const handleSubmit = (e) => {
-        props.postAuction(listing)
-        setListing({
-            name: '',
-            image: '',
-            description: '',
-            initial_price: '',
-            deadline: '',
-            user_id: props.user_id
+        e.preventDefault()
+        console.log("handle submit: ", listing, bid)
+        props.bidAuction(listing.id, bid.price)
+        setBid({
+            bid_price: ''
         })
     }
 
     return (
         <div>
             <h2> Bid Dashboard</h2>
+            Bid on {listing.name}
+            <img src={listing.image} />
+            <br /><br />
             <form onSubmit={handleSubmit}>
-                <label htmlFor='name'>Name</label>
-                <input name='name' onChange={handleChanges} value={listing.name} />
 
-                <label htmlFor='image'>Image</label>
-                <input name='name' onChange={handleChanges} value={listing.image} />
 
-                <label htmlFor='description'>Description</label>
-                <input name='description' onChange={handleChanges} value={listing.description} />
+                <label htmlFor='bid_price'>Starting Price</label>
+                <input name='price' onChange={handleChanges} value={bid.price} />
 
-                <label htmlFor='initial_price'>Starting Price</label>
-                <input name='initial_price' onChange={handleChanges} value={listing.initial_price} />
 
-                <label htmlFor='deadline'>Deadline</label>
-                <input type='datetime-local' name='deadline' onChange={handleChanges} value={listing.deadline} />
 
                 <button type='submit'>Place Bid</button>
             </form>
 
-            <AuctionList />
+
         </div>
     )
 }
@@ -64,4 +79,4 @@ export default connect(state => {
         // user_id: state.crudReducer.user_id
         auctions: state.auctions,
     }
-}, { postAuction })(BidderDash)
+}, { bidAuction })(BidderDash)

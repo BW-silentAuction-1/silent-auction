@@ -19,8 +19,17 @@ const Navigation = (props) => {
         <div className='NavBar'>
 
             <a href='https://silent-auction-app.herokuapp.com/'>Home</a>
+            &nbsp;&nbsp;&nbsp;
             <Link to='/auctions'>Auctions</Link>
-            {props.user_type === 'seller' ? (<Link to={`/dashboard/${props.user_type}/${props.user_id}`}>Seller Dashboard</Link>) : (<Link to={`/dashboard/${props.user_type}/${props.id}`}>Bidder Dashboard</Link>)}
+            &nbsp;&nbsp;&nbsp;
+
+            &nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;
+            {/* {props.user_type === 'seller' ? ( */}
+            <Link to={`/dashboard/seller/${props.user_id}`}>Seller Dashboard&nbsp;&nbsp;&nbsp;</Link>
+            <Link to={`/dashboard/bidder/${props.user_id}`}>Bidder Dashboard</Link>
+            &nbsp;&nbsp;&nbsp;
+
             <button onClick={signOut}>Sign out</button>
         </div>
     ) : (null)

@@ -31,7 +31,7 @@ const initialState = {
         user_id: '',
         user_type: ''
     },
-    auctions: [{ name: 'testxx' }],
+    auctions: [{ name: 'test' }],
     isFetching: false,
     isPosting: false,
     isUpdating: false,

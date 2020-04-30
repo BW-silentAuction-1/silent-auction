@@ -8,10 +8,9 @@ function SellerDash(props) {
     const [listing, setListing] = useState({
         name: '',
         image: '',
-        description: '',
-        initial_price: '',
-        deadline: '',
-        user_id: props.user_id
+        item_description: '',
+        item_price: '',
+        date_ending: '',
     })
 
     console.log("listing data", listing)
@@ -22,15 +21,17 @@ function SellerDash(props) {
     }
 
     const handleSubmit = (e) => {
+        e.preventDefault()
+
         props.postAuction(listing)
-        setListing({
-            name: '',
-            image: '',
-            description: '',
-            initial_price: '',
-            deadline: '',
-            user_id: props.user_id
-        })
+        // setListing({
+        //     name: '',
+        //     image: '',
+        //     description: '',
+        //     initial_price: '',
+        //     deadline: '',
+        //     user_id: props.user_id
+        // })
     }
 
     return (
@@ -41,16 +42,16 @@ function SellerDash(props) {
                 <input name='name' onChange={handleChanges} value={listing.name} />
 
                 <label htmlFor='image'>Image</label>
-                <input name='name' onChange={handleChanges} value={listing.image} />
+                <input name='image' onChange={handleChanges} value={listing.image} />
 
                 <label htmlFor='description'>Description</label>
-                <input name='description' onChange={handleChanges} value={listing.description} />
+                <input name='item_description' onChange={handleChanges} value={listing.item_description} />
 
                 <label htmlFor='initial_price'>Starting Price</label>
-                <input name='initial_price' onChange={handleChanges} value={listing.initial_price} />
+                <input name='item_price' onChange={handleChanges} value={listing.item_price} />
 
                 <label htmlFor='deadline'>Deadline</label>
-                <input type='datetime-local' name='deadline' onChange={handleChanges} value={listing.deadline} />
+                <input type='datetime-local' name='date_ending' onChange={handleChanges} value={listing.date_ending} />
 
                 <button type='submit'>Post Bid</button>
             </form>
