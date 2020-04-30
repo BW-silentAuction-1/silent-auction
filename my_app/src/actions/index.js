@@ -53,7 +53,7 @@ export const fetchAuction = () => {
     return (dispatch) => {
         dispatch({ type: FETCHING })
         //need endpoints from backend
-        return axiosWithAuth().get('/api/users/profile')
+        return axiosWithAuth().get('/api/auctions')
             .then(response => {
                 console.log("fetching auction response", response)
                 dispatch({ type: FETCHING_SUCCESS, payload: response.data })

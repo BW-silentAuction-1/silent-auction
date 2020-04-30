@@ -21,7 +21,7 @@ function AuctionList(props) {
                         console.log("auction from line 15 auction list", auction)
                         //need to add key 
 
-                        return <>{auction.name}{auction.image}<AuctionCard key={auction.id} auction={auction} /> <br /></>
+                        return <>{auction.name}<img src={auction.image} /><AuctionCard key={auction.id} auction={auction} /> <br /></>
                     } else {
                         return <>Expired: {auction.name}</>
                     }
@@ -30,13 +30,14 @@ function AuctionList(props) {
             </div>
         )
     } else {
+        console.log("asdfsd");
         return <></>;
     }
 }
 
 
 export default connect(state => {
-    const auctions = state.crudReducer && state.crudReducer.auctions ? state.crudReducer.auctions.auctions : []
+    const auctions = state.crudReducer && state.crudReducer.auctions ? state.crudReducer.auctions : []
     return {
         auctions: auctions,
         isUpdating: state.crudReducer.isUpdating,

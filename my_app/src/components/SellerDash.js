@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { postAuction } from '../actions'
 import AuctionList from './AuctionList'
+import PrivateRoute from '../utils/PrivateRoute'
 
 function SellerDash(props) {
     console.log("seller dash props", props)
@@ -13,10 +14,13 @@ function SellerDash(props) {
         date_ending: '',
     })
 
+    const [fetchAgain, setFetchAgain] = useState();
+
     console.log("listing data", listing)
 
     const handleChanges = e => {
         e.preventDefault()
+        setFetchAgain(false);
         setListing({ ...listing, [e.target.name]: e.target.value })
     }
 
@@ -24,6 +28,7 @@ function SellerDash(props) {
         e.preventDefault()
 
         props.postAuction(listing)
+        setFetchAgain(true);
         // setListing({
         //     name: '',
         //     image: '',
@@ -53,10 +58,10 @@ function SellerDash(props) {
                 <label htmlFor='deadline'>Deadline</label>
                 <input type='datetime-local' name='date_ending' onChange={handleChanges} value={listing.date_ending} />
 
-                <button type='submit'>Post Bid</button>
+                <button type='submit'> Post Item</button>
             </form>
 
-            <AuctionList />
+            <AuctionList fetchAgain={fetchAgain} />
         </div>
     )
 }
