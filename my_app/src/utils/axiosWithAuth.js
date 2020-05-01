@@ -6,8 +6,10 @@ export const axiosWithAuth = () => {
     return axios.create({
         //return base url from backend
         baseURL: 'https://silent-auction-app.herokuapp.com/',
+
         headers: {
-            Authorization: "adslkjdflskajflkjf"
+            // "Content-Type": "application/json",
+            Authorization: token
         }
     })
 }

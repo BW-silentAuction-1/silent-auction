@@ -1,14 +1,16 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { useHistory } from 'react-router-dom'
 import { connect } from 'react-redux'
+
+import StyledHead from "./styled/NavBar";
 
 const Navigation = (props) => {
     const history = useHistory()
     const token = window.localStorage.getItem('token')
     console.log(props)
 
-    const signOut = (e) => {
+    const signOut = (e) => { 
         e.preventDefault()
         window.localStorage.removeItem('token')
         history.push('/login')
@@ -16,13 +18,22 @@ const Navigation = (props) => {
     }
 
     return token ? (
-        <div className='NavBar'>
+        <StyledHead className='NavBar'>
 
             <a href='https://silent-auction-app.herokuapp.com/'>Home</a>
-            <Link to='/auctions'>Auctions</Link>
-            {props.user_type === 'seller' ? (<Link to={`/dashboard/${props.user_type}/${props.user_id}`}>Seller Dashboard</Link>) : (<Link to={`/dashboard/${props.user_type}/${props.id}`}>Bidder Dashboard</Link>)}
+            
+            <NavLink to='/auctions'>Auctions</NavLink>
+            
+
+            
+            
+            {/* {props.user_type === 'seller' ? ( */}
+            <NavLink to={`/dashboard/seller/${props.user_id}`}>Seller Dashboard</NavLink>
+            <NavLink to={`/dashboard/bidder/${props.user_id}`}>Bidder Dashboard</NavLink>
+            
+
             <button onClick={signOut}>Sign out</button>
-        </div>
+        </StyledHead>
     ) : (null)
 }
 
