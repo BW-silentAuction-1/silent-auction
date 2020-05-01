@@ -20,7 +20,6 @@ import ItemLook from "./components/ItemLook";
 
 import Styles from "./assets/Styles";
 
-
 const initialSignupForm = {
   fname: "",
   lname: "",
