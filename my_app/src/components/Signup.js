@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom"
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 import Styles from "../assets/Styles";
@@ -55,14 +55,14 @@ export default function Signup(props) {
         <StyledDiv>
           <h2>Welcome</h2>
           <p>We need some information to get started... hope you don't mind.</p>
-          <p className="errors">
-            {/* <div>{formErrors.fname}</div>
-                <div>{formErrors.lname}</div>
-                <div>{formErrors.uname}</div>
-                <div>{formErrors.email}</div>
-                <div>{formErrors.pass}</div>
-                <div>{formErrors.tos}</div> */}
-          </p>
+          {/* <p className="errors">
+            <div>{formErrors.fname}</div>
+            <div>{formErrors.lname}</div>
+            <div>{formErrors.uname}</div>
+            <div>{formErrors.email}</div>
+            <div>{formErrors.pass}</div>
+            <div>{formErrors.tos}</div>
+          </p> */}
           <form>
             <div>
               <label>first name</label>
@@ -145,6 +145,10 @@ export default function Signup(props) {
 }
 
 const StyledDiv = styled.div`
+  flex-grow: 1;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
   h2 {
     text-align: center;
     font-size: ${Styles.font.size.medLarge};
@@ -166,7 +170,6 @@ const StyledDiv = styled.div`
     justify-content: space-between;
 
     padding: 20px;
-
     label {
       font-size: ${Styles.font.size.small};
     }
