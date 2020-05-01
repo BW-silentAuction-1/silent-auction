@@ -31,14 +31,15 @@ function SellerDash(props) {
 
     props.postAuction(listing);
     setFetchAgain(true);
-    // setListing({
-    //     name: '',
-    //     image: '',
-    //     description: '',
-    //     initial_price: '',
-    //     deadline: '',
-    //     user_id: props.user_id
-    // })
+    setListing({
+        name: '',
+        image: '',
+        item_description: '',
+        item_price: '',
+        date_ending: '',
+        deadline: '',
+        user_id: props.user_id
+    })
   };
 
   return (
