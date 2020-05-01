@@ -166,6 +166,5 @@ export default function App() {
 const StyledApp = styled.div`
   height: 100%;
   width: 100%;
-  background-color: ${Styles.color.bg};
   font-family: ${Styles.font.family};
 `;

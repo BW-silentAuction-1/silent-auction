@@ -38,7 +38,7 @@ const StyledCard = styled.div`
   width: 30%;
   cursor: pointer;
   padding: 10px;
-  margin: 10px;
+  margin: 5vh 1%;
   background-color: #fff;
   box-shadow: 0 0 5px 1px #000;
   border-radius: 10px;

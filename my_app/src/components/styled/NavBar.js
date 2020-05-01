@@ -13,7 +13,7 @@ const StyledHead = styled.div`
     justify-content: center;
     align-items: center;
     font-family: ${Styles.font.family};
-    font-size: ${Styles.font.size.medSmall};
+    font-size: ${Styles.font.size.small};
     font-weight: 500;
     background-color: ${Styles.color.mainLight};
     color: ${Styles.color.white};
