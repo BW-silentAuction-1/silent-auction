@@ -4,8 +4,8 @@ import { updateAuction, deleteAuction } from '../actions'
 import { useHistory } from 'react-router-dom'
 import { BidCard } from './BidCard'
 
-
-
+import Styles from "../assets/Styles";
+import styled from "styled-components";
 
 const ItemLook = (props) => {
     // console.log('itemlook props', props)
@@ -118,6 +118,7 @@ const ItemLook = (props) => {
         </div>
     )
 }
+
 
 export default connect(state => {
     return {

@@ -1,41 +1,47 @@
 import React, { useState } from "react";
 // import {useHistory, Link} from 'react-router-dom'
 import styled from "styled-components";
-import { connect } from 'react-redux';
-import { loginSave } from '../actions'
+import { connect } from "react-redux";
+import { loginSave } from "../actions";
 import Styles from "../assets/Styles";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
+import { NavLink } from "react-router-dom";
+import Splash from "./Splash";
+import StyledLogin from "./Form";
 
-
-const initialState = { username: '', password: '' }
+const initialState = { username: "", password: "" };
 
 function Login(props) {
-
   const [loginCredentials, setLoginCredentials] = useState(
     initialState
     // uname: '',
     // password: '',
-  )
+  );
 
-  const handleChanges = e => {
+  const handleChanges = (e) => {
     console.log("handle changes called");
-    e.preventDefault()
-    setLoginCredentials({ ...loginCredentials, [e.target.name]: e.target.value })
-  }
+    e.preventDefault();
+    setLoginCredentials({
+      ...loginCredentials,
+      [e.target.name]: e.target.value
+    });
+  };
 
   const handleSubmit = (e) => {
     console.log("handle submit called");
-    e.preventDefault()
+    e.preventDefault();
 
-    axiosWithAuth().post('/api/auth/login', loginCredentials)
-      .then(response => {
+    axiosWithAuth()
+      .post("/api/auth/login", loginCredentials)
+      .then((response) => {
         console.log("handle submit success: ", response.data.token);
-        localStorage.setItem('token', response.data.token)
-        props.history.push('/auctions')
-      }).catch(err => {
+        localStorage.setItem("token", response.data.token);
+        props.history.push("/auctions");
+      })
+      .catch((err) => {
         console.log("failed to login: ", err);
       });
-  }
+  };
 
   // props.loginSave(loginCredentials)
   // setLoginCredentials({
@@ -43,35 +49,54 @@ function Login(props) {
   //   password: ''
   // })
 
-
   return (
-    <StyledDiv>
-      <h2 class="login-text">Welcome back!</h2>
-      <p>please enter your login info below</p>
-      <form onSubmit={handleSubmit} class="login-form">
-        <div>
-          <label htmlFor="username"></label>
-          <input id="username" type="text" name="username" onChange={handleChanges} required></input>
-          {/* data-cy="uname" */}
+    <StyledLogin>
+      <Splash />
+      <div className="Form">
+        <div className="nav">
+          <NavLink to="/login">Login</NavLink>
+          <NavLink to="/signup">Signup</NavLink>
         </div>
-        <div>
-          <label htmlFor="password"></label>
-          <input id="password" type="password" name="password" onChange={handleChanges} required></input>
-          {/* data-cy="pass" */}
-        </div>
-        <label>
-          <input type="checkbox" name="remember" data-cy="remember" />
-          <span>Remember me</span>
-        </label>
-        <div className="btns">
-          <button data-cy="cancel">Cancel</button>
-          <button type='submit' >Log In</button>
-        </div>
-      </form>
-    </StyledDiv>
+        <StyledDiv>
+          <h2 class="login-text">Welcome back!</h2>
+          <p>please enter your login info below</p>
+          <form onSubmit={handleSubmit} class="login-form">
+            <div>
+              <label htmlFor="username">Username</label>
+              <input
+                id="username"
+                type="text"
+                name="username"
+                onChange={handleChanges}
+                required
+              ></input>
+              {/* data-cy="uname" */}
+            </div>
+            <div>
+              <label htmlFor="password">Password</label>
+              <input
+                id="password"
+                type="password"
+                name="password"
+                onChange={handleChanges}
+                required
+              ></input>
+              {/* data-cy="pass" */}
+            </div>
+            <label>
+              <input type="checkbox" name="remember" data-cy="remember" />
+              <span>Remember me</span>
+            </label>
+            <div className="btns">
+              <button data-cy="cancel">Cancel</button>
+              <button type="submit">Log In</button>
+            </div>
+          </form>
+        </StyledDiv>
+      </div>
+    </StyledLogin>
   );
 }
-
 
 const StyledDiv = styled.div`
   h2 {
@@ -155,7 +180,9 @@ const StyledDiv = styled.div`
   }
 `;
 
-export default connect(state => {
-  return {
-  }
-}, { loginSave })(Login)
+export default connect(
+  (state) => {
+    return {};
+  },
+  { loginSave }
+)(Login);

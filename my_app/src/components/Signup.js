@@ -1,132 +1,146 @@
 import React, { useState } from "react";
+import { NavLink } from "react-router-dom"
 import styled from "styled-components";
 
 import Styles from "../assets/Styles";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 
-
+import Splash from "./Splash";
+import StyledLogin from "./Form";
 
 export default function Signup(props) {
   const [signupCredentials, setSignupCredentials] = useState({
-    first_name: '',
-    last_name: '',
-    email: '',
-    username: '',
-    password: ''
-
-  }
-  )
-  const submitHandler = e => {
-    e.preventDefault()
+    first_name: "",
+    last_name: "",
+    email: "",
+    username: "",
+    password: ""
+  });
+  const submitHandler = (e) => {
+    e.preventDefault();
     console.log("submit called : ", signupCredentials);
-    axiosWithAuth().post('/api/auth/register', signupCredentials)
-      .then(response => {
-        props.history.push('/auctions')
-
-
-      }).catch(err => {
-        console.log("Error: ", err);
+    axiosWithAuth()
+      .post("/api/auth/register", signupCredentials)
+      .then((response) => {
+        props.history.push("/auctions");
       })
-  }
+      .catch((err) => {
+        console.log("Error: ", err);
+      });
+  };
 
-
-  const signupChange = e => {
-    e.preventDefault()
-    setSignupCredentials({ ...signupCredentials, [e.target.name]: e.target.value })
-  }
+  const signupChange = (e) => {
+    e.preventDefault();
+    setSignupCredentials({
+      ...signupCredentials,
+      [e.target.name]: e.target.value
+    });
+  };
   const {
     // signupForm,
     formErrors,
     // signupChange,
-    checkboxChange,
+    checkboxChange
     // submitHandler,
     // buttonDisabled
   } = props;
   return (
-    <StyledDiv>
-      <h2>Welcome</h2>
-      <p>We need some information to get started... hope you don't mind.</p>
-      <p className="errors">
-        {/* <div>{formErrors.fname}</div>
+    <StyledLogin>
+      <Splash />
+      <div className="Form">
+        <div className="nav">
+          <NavLink to="/login">Login</NavLink>
+          <NavLink to="/signup">Signup</NavLink>
+        </div>
+        <StyledDiv>
+          <h2>Welcome</h2>
+          <p>We need some information to get started... hope you don't mind.</p>
+          <p className="errors">
+            {/* <div>{formErrors.fname}</div>
                 <div>{formErrors.lname}</div>
                 <div>{formErrors.uname}</div>
                 <div>{formErrors.email}</div>
                 <div>{formErrors.pass}</div>
                 <div>{formErrors.tos}</div> */}
-      </p>
-      <form >
-        <div>
-          <label>first name</label>
-          <input
-            type="text"
-            name="first_name"
-            data-cy="first_name"
-            value={signupCredentials.first_name}
-            onChange={signupChange}
-
-          />
-        </div>
-        <div>
-          <label>last name</label>
-          <input
-            type="text"
-            name="last_name"
-            data-cy="last_name"
-            value={signupCredentials.last_name}
-            onChange={signupChange}
-          />
-        </div>
-        <div>
-          <label>email</label>
-          <input
-            type="text"
-            name="email"
-            data-cy="email"
-            value={signupCredentials.email}
-            onChange={signupChange}
-          />
-        </div>
-        <div>
-          <label>username</label>
-          <input
-            type="text"
-            name="username"
-            data-cy="username"
-            value={signupCredentials.username}
-            onChange={signupChange}
-          />
-        </div>
-        <div>
-          <label>password</label>
-          <input
-            type="password"
-            name="password"
-            data-cy="password"
-            value={signupCredentials.password}
-            onChange={signupChange}
-          />
-        </div>
-        <label>
-          <input
-            type="checkbox"
-            name="tos"
-            data-cy="tos"
-            checked={signupCredentials.tosIsChecked}
-            onChange={checkboxChange}
-          />
-          <span class="checkbox" />
-          <span>I agree to the terms of service</span>
-        </label>
-        <div className="btns">
-          <div className="button-box" data-cy="cancel">Cancel</div>
-          <button
-            onClick={submitHandler}
-            // disabled={buttonDisabled}
-            data-cy="signup"
-          >Sign up!</button>
-        </div>
-      </form>
-    </StyledDiv>
+          </p>
+          <form>
+            <div>
+              <label>first name</label>
+              <input
+                type="text"
+                name="first_name"
+                data-cy="first_name"
+                value={signupCredentials.first_name}
+                onChange={signupChange}
+              />
+            </div>
+            <div>
+              <label>last name</label>
+              <input
+                type="text"
+                name="last_name"
+                data-cy="last_name"
+                value={signupCredentials.last_name}
+                onChange={signupChange}
+              />
+            </div>
+            <div>
+              <label>email</label>
+              <input
+                type="text"
+                name="email"
+                data-cy="email"
+                value={signupCredentials.email}
+                onChange={signupChange}
+              />
+            </div>
+            <div>
+              <label>username</label>
+              <input
+                type="text"
+                name="username"
+                data-cy="username"
+                value={signupCredentials.username}
+                onChange={signupChange}
+              />
+            </div>
+            <div>
+              <label>password</label>
+              <input
+                type="password"
+                name="password"
+                data-cy="password"
+                value={signupCredentials.password}
+                onChange={signupChange}
+              />
+            </div>
+            <label>
+              <input
+                type="checkbox"
+                name="tos"
+                data-cy="tos"
+                checked={signupCredentials.tosIsChecked}
+                onChange={checkboxChange}
+              />
+              <span class="checkbox" />
+              <span>I agree to the terms of service</span>
+            </label>
+            <div className="btns">
+              <div className="button-box" data-cy="cancel">
+                Cancel
+              </div>
+              <button
+                onClick={submitHandler}
+                // disabled={buttonDisabled}
+                data-cy="signup"
+              >
+                Sign up!
+              </button>
+            </div>
+          </form>
+        </StyledDiv>
+      </div>
+    </StyledLogin>
   );
 }
 
@@ -179,7 +193,8 @@ const StyledDiv = styled.div`
       display: flex;
       flex-flow: row nowrap;
       justify-content: space-evenly;
-      button, .button-box {
+      button,
+      .button-box {
         padding: 6px 20px;
         font-size: ${Styles.font.size.small};
         background-color: ${Styles.color.mainDark};

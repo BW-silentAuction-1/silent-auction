@@ -149,17 +149,7 @@ export default function App() {
     <StyledApp className="App">
       <Navigation />
       <Switch>
-
-        <Route exact path="/">
-          <Form
-            signupForm={signupForm}
-            formErrors={formErrors}
-            inputChange={inputChange}
-            checkboxChange={checkboxChange}
-            submitHandler={submitHandler}
-          // buttonDisabled={buttonDisabled}
-          />
-        </Route>
+        <Route exact path="/" component={Form} />
         <Route exact path='/signup' component={Signup} />
         <Route exact path='/login' component={Login} />
         <PrivateRoute exact path='/auctions' component={AuctionList} />
